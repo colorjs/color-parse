@@ -2,7 +2,7 @@
 
 Parse color values from a string. Highly inspired by substack’s [parse-color](https://github.com/substack/parse-color), except for it doesn’t do extra conversions to each possible space, which results in reduced [color-convert](https://github.com/harthur/color-convert) dependency and increased speed.
 Also it tries to parse some additional CSS4 color functions, like hwb, gray, named hue etc.
-The goal of project is to provide atomic css color string parser with tiny automatable API.
+The goal of the project is to provide an atomic css color string parser with tiny automatable API.
 
 `$ npm install color-parse`
 
