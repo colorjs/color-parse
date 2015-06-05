@@ -17,9 +17,9 @@ parse('hsla(12, 10%, 50%, .3)');
 
 ## Related
 
-* [color-parser](http://npmjs.org/package/color-parser) — parser by TJ Holowaychuk. Supports limited set of spaces.
-* [parse-color](http://npmjs.org/package/parse-color) — parser by Substack. Performs calculations to every possible space.
-* [color-string](http://npmjs.org/package/color-string) — color parsing/serializing module by Harthur/MoOx. Has extensive API for parsing and serializing from any to any space.
+* [color-parser](http://npmjs.org/package/color-parser) — parser by TJ. Supports limited set of spaces.
+* [parse-color](http://npmjs.org/package/parse-color) — parser by James Halliday. Performs calculations to every possible space.
+* [color-string](http://npmjs.org/package/color-string) — color parsing/serializing module by Heather Arthur. Has extensive API for parsing and serializing from any to any space.
 
 
 [![NPM](https://nodei.co/npm/emmy.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/emmy/)
