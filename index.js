@@ -90,9 +90,12 @@ function parse (cstr) {
 				else {
 					return parseInt(x, 16);
 				}
-			})
-		;
-		if (parts[3]) alpha = parts[3] * 100 / 255;
+			});
+
+		if (parts.length === 4) {
+			alpha = parts[3] / 255;
+			parts = parts.slice(0,3);
+		}
 		if (!parts[0]) parts[0] = 0;
 		if (!parts[1]) parts[1] = 0;
 		if (!parts[2]) parts[2] = 0;
