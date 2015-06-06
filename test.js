@@ -245,6 +245,27 @@ describe('special cases', function () {
 			alpha: 1
 		});
 	});
+	it('hsl(red, 10%, 10%)', function () {
+		assert.deepEqual(parse('hsl(red, 10%, 10%)'), {
+			space: 'hsl',
+			values: [0,10,10],
+			alpha: 1
+		});
+	});
+	it('hsl(10deg, 10%, 10%)', function () {
+		assert.deepEqual(parse('hsl(10deg, 10%, 10%)'), {
+			space: 'hsl',
+			values: [10,10,10],
+			alpha: 1
+		});
+	});
+	it('lch(5, 5, orange)', function () {
+		assert.deepEqual(parse('lch(5, 5, orange)'), {
+			space: 'lch',
+			values: [5,5,60],
+			alpha: 1
+		});
+	});
 	it('#afd6', function () {
 		assert.deepEqual(parse('#afd6'), {
 			space: 'rgb',

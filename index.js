@@ -40,7 +40,7 @@ function parse (cstr) {
 	else if (cstr === 'transparent') alpha = 0;
 
 	//color space
-	else if (m = /^((?:rgb|hs[lv]|hwb|cmyk|xyz|lab|gray)a?)\s*\(([^\)]*)\)/.exec(cstr)) {
+	else if (m = /^((?:rgb|hs[lv]|hwb|cmyk|xyz|gray|lab|lch)a?)\s*\(([^\)]*)\)/.exec(cstr)) {
 		var name = m[1];
 		var base = name.replace(/a$/, '');
 		space = base;
@@ -57,7 +57,7 @@ function parse (cstr) {
 					return parseFloat(x);
 				}
 				//hue
-				else if (i === 0 && base[0] === 'h') {
+				else if (base[i] === 'h') {
 					//<deg>
 					if (/deg$/.test(x)) {
 						return parseFloat(x);
