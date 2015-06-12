@@ -7,16 +7,13 @@ Atomic color string parser with tiny automatable API.
 
 ```js
 var parse = require('color-parse');
-
 parse('hsla(12, 10%, 50%, .3)'); //{ space: 'hsl', values: [12, 10, 50], alpha: 0.3 }
 ```
 
 ## Parsed strings
 
-* [x] `rgb()`
-* [x] `rgba()`
-* [x] `hsl()` inc. [named hues](http://dev.w3.org/csswg/css-color/#simple-hues)
-* [x] `hsla()`
+* [x] `rgb()`, `rgba()`
+* [x] `hsl()`, `hsla()` inc. [named hues](http://dev.w3.org/csswg/css-color/#simple-hues)
 * [x] `hwb()`
 * [x] `cmyk()`
 * [x] `xyz()`
@@ -35,7 +32,7 @@ parse('hsla(12, 10%, 50%, .3)'); //{ space: 'hsl', values: [12, 10, 50], alpha: 
 
 ## Related
 
-* [parse-color](http://npmjs.org/package/parse-color) — parser by James Halliday. Performs calculations to every possible space.
+* [parse-color](http://npmjs.org/package/parse-color) — parser by James Halliday. Initially inspired by that awesome parser. It performs calculations to every possible space which results in bloated size of lib.
 * [color-parser](http://npmjs.org/package/color-parser) — parser by TJ. Supports limited set of spaces.
 * [color-string](http://npmjs.org/package/color-string) — color parsing/serializing module by Heather Arthur. Has extensive API for parsing and serializing from any to any space.
 
