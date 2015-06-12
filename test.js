@@ -228,10 +228,8 @@ describe('edge cases', function () {
 		});
 	});
 	it('yellowblue', function () {
-		assert.deepEqual(parse('yellowblue'), {
-			space: 'rgb',
-			values: [0,0,0],
-			alpha: 1
+		assert.throws(function(){
+			parse('yellowblue');
 		});
 	});
 });
@@ -278,6 +276,27 @@ describe('special cases', function () {
 			space: 'rgb',
 			values: [170,255,221],
 			alpha: 0.4
+		});
+	});
+	it('(R12 / G45 / B234)', function () {
+		assert.deepEqual(parse('(R12 / G45 / B234)'), {
+			space: 'rgb',
+			values: [12, 45, 234],
+			alpha: 1
+		});
+	});
+	it('R:12 G:45 B:234', function () {
+		assert.deepEqual(parse('R:12 G:45 B:234'), {
+			space: 'rgb',
+			values: [12, 45, 234],
+			alpha: 1
+		});
+	});
+	it('C100/M80/Y0/K35', function () {
+		assert.deepEqual(parse('C100/M80/Y0/K35'), {
+			space: 'cmyk',
+			values: [100, 80, 0, 35],
+			alpha: 1
 		});
 	});
 });

@@ -40,7 +40,7 @@ function parse (cstr) {
 	else if (cstr === 'transparent') alpha = 0;
 
 	//color space
-	else if (m = /^((?:rgb|hs[lvb]|hwb|cmyk?|xy[zy]|gray|lab|lch|[ly]uv|lms)a?)\s*\(([^\)]*)\)/.exec(cstr)) {
+	else if (m = /^((?:rgb|hs[lvb]|hwb|cmyk?|xy[zy]|gray|lab|lchu?v?|[ly]uv|lms)a?)\s*\(([^\)]*)\)/.exec(cstr)) {
 		var name = m[1];
 		var base = name.replace(/a$/, '');
 		space = base;
@@ -99,6 +99,19 @@ function parse (cstr) {
 		if (!parts[0]) parts[0] = 0;
 		if (!parts[1]) parts[1] = 0;
 		if (!parts[2]) parts[2] = 0;
+	}
+
+	//named channels case
+	else if (cstr.length > 10 && /[0-9](?:\s|\/)/.test(cstr)) {
+		parts = cstr.match(/([0-9]+)/g).map(function (value) {
+			return parseFloat(value);
+		});
+
+		space = cstr.match(/([a-z])/ig).join('').toLowerCase();
+	}
+
+	else {
+		throw Error('Unable to parse ' + cstr);
 	}
 
 	return {
