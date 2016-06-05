@@ -33,7 +33,7 @@ function parse (cstr) {
 
 	//keyword
 	if (names[cstr]) {
-		parts = names[cstr];
+		parts = names[cstr].slice();
 	}
 
 	//reserved words

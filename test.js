@@ -250,6 +250,13 @@ describe('special cases', function () {
 			alpha: 1
 		});
 	});
+	it('hsl(red, 10%, 10%);', function () {
+		assert.deepEqual(parse('hsl(red, 10%, 10%);'), {
+			space: 'hsl',
+			values: [0,10,10],
+			alpha: 1
+		});
+	});
 	it('hsl(10deg, 10%, 10%)', function () {
 		assert.deepEqual(parse('hsl(10deg, 10%, 10%)'), {
 			space: 'hsl',
