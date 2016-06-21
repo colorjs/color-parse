@@ -306,4 +306,11 @@ describe('special cases', function () {
 			alpha: 1
 		});
 	});
+	it('Array', function () {
+		assert.deepEqual(parse([1,2,3]), {
+			space: 'rgb',
+			values: [1,2,3],
+			alpha: 1
+		});
+	});
 });

@@ -39,6 +39,12 @@ function parse (cstr) {
 	//reserved words
 	else if (cstr === 'transparent') alpha = 0;
 
+	//array passed
+	else if (Array.isArray(cstr) || ArrayBuffer.isView(cstr)) {
+		parts = [cstr[0], cstr[1], cstr[2]];
+		alpha = cstr.length === 4 ? cstr[3] : 1;
+	}
+
 	//color space
 	else if (m = /^((?:rgb|hs[lvb]|hwb|cmyk?|xy[zy]|gray|lab|lchu?v?|[ly]uv|lms)a?)\s*\(([^\)]*)\)/.exec(cstr)) {
 		var name = m[1];
