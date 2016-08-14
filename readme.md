@@ -12,7 +12,7 @@ parse('hsla(12, 10%, 50%, .3)'); //{ space: 'hsl', values: [12, 10, 50], alpha: 
 
 ## Parsed strings
 
-* [x] `rgb()`, `rgba()`
+* [x] `rgb(10, 20, 30)`, `rgba(10, 20, 30, .3)`
 * [x] `hsl()`, `hsla()` inc. [named hues](http://dev.w3.org/csswg/css-color/#simple-hues)
 * [x] `hwb()`
 * [x] `cmyk()`
@@ -24,9 +24,17 @@ parse('hsla(12, 10%, 50%, .3)'); //{ space: 'hsl', values: [12, 10, 50], alpha: 
 * [x] `#RGBA`
 * [x] `#RRGGBB`
 * [x] `#RRGGBBAA`
-* [x] `R:0 G:0 B:0`
-* [x] `(R0 / G0 / B0)`
+* [x] `R:10 G:20 B:30`
+* [x] `(R10 / G20 / B30)`
 * [x] `C100/M80/Y0/K35`
+
+## Parsed not strings
+
+* [x] `[10, 20, 20]` as red, green and blue channels
+* [x] `{r: 10, g: 20, b: 30}`
+* [x] `{red: 10, green: 20, blue: 30}`
+* [x] `{h: 10, s: 20, l: 30}`
+* [x] `0xrrggbb` numbers
 
 
 
