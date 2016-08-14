@@ -26,10 +26,11 @@
   },
   "homepage": "https://github.com/dfcreative/color-parse",
   "dependencies": {
-    "color-name": "^1.0.0"
+    "color-name": "^1.0.0",
+    "is-plain-obj": "^1.1.0",
+    "left-pad": "^1.1.1"
   },
   "devDependencies": {
-    "chai": "^3.0.0",
-    "mocha": "^2.2.5"
+    "mocha": "^3.0.2"
   }
 }

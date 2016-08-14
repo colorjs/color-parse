@@ -6,6 +6,8 @@ module.exports = parse;
 
 
 var names = require('color-name');
+var pad = require('left-pad');
+var isObject = require('is-plain-obj');
 
 
 /**
@@ -20,6 +22,15 @@ var baseHues = {
 	green: 180,
 	blue: 240,
 	purple: 300
+};
+
+var channels = {
+	r: 0,
+	red: 0,
+	g: 1,
+	green: 1,
+	b: 2,
+	blue: 2
 };
 
 
@@ -39,10 +50,63 @@ function parse (cstr) {
 	//reserved words
 	else if (cstr === 'transparent') alpha = 0;
 
+	//number (weird) case
+	else if (typeof cstr === 'number') {
+		parts = [cstr >>> 16, (cstr & 0x00ff00) >>> 8, cstr & 0x0000ff];
+	}
+
+	//object case - detects css cases of rgb and hsl
+	else if (isObject(cstr)) {
+		if (cstr.r != null) {
+			parts = [cstr.r, cstr.g, cstr.b];
+		}
+		else if (cstr.red != null) {
+			parts = [cstr.red, cstr.green, cstr.blue];
+		}
+		else if (cstr.h != null) {
+			parts = [cstr.h, cstr.s, cstr.l];
+			space = 'hsl';
+		}
+		else if (cstr.hue != null) {
+			parts = [cstr.hue, cstr.saturation, cstr.lightness];
+			space = 'hsl';
+		}
+
+		if (cstr.a != null) alpha = cstr.a;
+		else if (cstr.alpha != null) alpha = cstr.alpha;
+		else if (cstr.opacity != null) alpha = cstr.opacity / 100;
+	}
+
 	//array passed
 	else if (Array.isArray(cstr) || ArrayBuffer.isView(cstr)) {
 		parts = [cstr[0], cstr[1], cstr[2]];
 		alpha = cstr.length === 4 ? cstr[3] : 1;
+	}
+
+	//hex
+	else if (/^#[A-Fa-f0-9]+$/.test(cstr)) {
+		var base = cstr.replace(/^#/,'');
+		var size = base.length;
+		var isShort = size <= 4;
+
+		parts = base.split(isShort ? /(.)/ : /(..)/);
+		parts = parts.filter(Boolean)
+			.map(function (x) {
+				if (isShort) {
+					return parseInt(x + x, 16);
+				}
+				else {
+					return parseInt(x, 16);
+				}
+			});
+
+		if (parts.length === 4) {
+			alpha = parts[3] / 255;
+			parts = parts.slice(0,3);
+		}
+		if (!parts[0]) parts[0] = 0;
+		if (!parts[1]) parts[1] = 0;
+		if (!parts[2]) parts[2] = 0;
 	}
 
 	//color space
@@ -79,32 +143,6 @@ function parse (cstr) {
 		if (name === base) parts.push(1);
 		alpha = parts[size] === undefined ? 1 : parts[size];
 		parts = parts.slice(0, size);
-	}
-
-	//hex
-	else if (/^#[A-Fa-f0-9]+$/.test(cstr)) {
-		var base = cstr.replace(/^#/,'');
-		var size = base.length;
-		var isShort = size <= 4;
-
-		parts = base.split(isShort ? /(.)/ : /(..)/);
-		parts = parts.filter(Boolean)
-			.map(function (x) {
-				if (isShort) {
-					return parseInt(x + x, 16);
-				}
-				else {
-					return parseInt(x, 16);
-				}
-			});
-
-		if (parts.length === 4) {
-			alpha = parts[3] / 255;
-			parts = parts.slice(0,3);
-		}
-		if (!parts[0]) parts[0] = 0;
-		if (!parts[1]) parts[1] = 0;
-		if (!parts[2]) parts[2] = 0;
 	}
 
 	//named channels case

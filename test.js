@@ -1,4 +1,4 @@
-var assert = require('chai').assert;
+var assert = require('assert');
 var parse = require('./');
 
 /** parse-color tests */
@@ -310,6 +310,30 @@ describe('special cases', function () {
 		assert.deepEqual(parse([1,2,3]), {
 			space: 'rgb',
 			values: [1,2,3],
+			alpha: 1
+		});
+	});
+	it('Object', function () {
+		assert.deepEqual(parse({r:1,g:2,b:3}), {
+			space: 'rgb',
+			values: [1,2,3],
+			alpha: 1
+		});
+		assert.deepEqual(parse({red:1,green:2,blue:3}), {
+			space: 'rgb',
+			values: [1,2,3],
+			alpha: 1
+		});
+		assert.deepEqual(parse({h:1,s:2,l:3}), {
+			space: 'hsl',
+			values: [1,2,3],
+			alpha: 1
+		});
+	});
+	it('Number', function () {
+		assert.deepEqual(parse(0xA141E), {
+			space: 'rgb',
+			values: [10,20,30],
 			alpha: 1
 		});
 	});
