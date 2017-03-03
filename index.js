@@ -51,28 +51,36 @@ function parse (cstr) {
 
 		//hex
 		else if (/^#[A-Fa-f0-9]+$/.test(cstr)) {
-			var base = cstr.replace(/^#/,'');
+			var base = cstr.slice(1);
 			var size = base.length;
 			var isShort = size <= 4;
+			alpha = 1;
 
-			parts = base.split(isShort ? /(.)/ : /(..)/);
-			parts = parts.filter(Boolean)
-				.map(function (x) {
-					if (isShort) {
-						return parseInt(x + x, 16);
-					}
-					else {
-						return parseInt(x, 16);
-					}
-				});
-
-			if (parts.length === 4) {
-				alpha = parts[3] / 255;
-				parts = parts.slice(0,3);
+			if (isShort) {
+				parts = [
+					parseInt(base[0] + base[0], 16),
+					parseInt(base[1] + base[1], 16),
+					parseInt(base[2] + base[2], 16)
+				]
+				if (size === 4) {
+					alpha = parseInt(base[3] + base[3], 16) / 255
+				}
 			}
+			else {
+				parts = [
+					parseInt(base[0] + base[1], 16),
+					parseInt(base[2] + base[3], 16),
+					parseInt(base[4] + base[5], 16)
+				]
+				if (size === 8) {
+					alpha = parseInt(base[6] + base[7], 16) / 255
+				}
+			}
+
 			if (!parts[0]) parts[0] = 0;
 			if (!parts[1]) parts[1] = 0;
 			if (!parts[2]) parts[2] = 0;
+
 			space = 'rgb'
 		}
 
