@@ -33,17 +33,20 @@ var baseHues = {
  * @return {Object} A space indicator `space`, an array `values` and `alpha`
  */
 function parse (cstr) {
-	var m, parts = [0,0,0], alpha = 1, space = 'rgb';
+	var m, parts = [], alpha = 1, space;
 
 	if (typeof cstr === 'string') {
 		//keyword
 		if (names[cstr]) {
 			parts = names[cstr].slice();
+			space = 'rgb'
 		}
 
 		//reserved words
 		else if (cstr === 'transparent') {
 			alpha = 0;
+			space = 'rgb'
+			parts = [0,0,0]
 		}
 
 		//hex
@@ -70,6 +73,7 @@ function parse (cstr) {
 			if (!parts[0]) parts[0] = 0;
 			if (!parts[1]) parts[1] = 0;
 			if (!parts[2]) parts[2] = 0;
+			space = 'rgb'
 		}
 
 		//color space
@@ -116,14 +120,11 @@ function parse (cstr) {
 
 			space = cstr.match(/([a-z])/ig).join('').toLowerCase();
 		}
-
-		else {
-			throw Error('Unable to parse ' + cstr);
-		}
 	}
 
 	//numeric case
 	else if (typeof cstr === 'number') {
+		space = 'rgb'
 		parts = [cstr >>> 16, (cstr & 0x00ff00) >>> 8, cstr & 0x0000ff];
 	}
 
@@ -131,9 +132,11 @@ function parse (cstr) {
 	else if (isObject(cstr)) {
 		if (cstr.r != null) {
 			parts = [cstr.r, cstr.g, cstr.b];
+			space = 'rgb'
 		}
 		else if (cstr.red != null) {
 			parts = [cstr.red, cstr.green, cstr.blue];
+			space = 'rgb'
 		}
 		else if (cstr.h != null) {
 			parts = [cstr.h, cstr.s, cstr.l];
@@ -152,13 +155,9 @@ function parse (cstr) {
 	//array
 	else if (Array.isArray(cstr) || ArrayBuffer.isView(cstr)) {
 		parts = [cstr[0], cstr[1], cstr[2]];
+		space = 'rgb'
 		alpha = cstr.length === 4 ? cstr[3] : 1;
 	}
-
-	else {
-		throw Error('Unable to parse ' + cstr);
-	}
-
 
 	return {
 		space: space,

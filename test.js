@@ -228,9 +228,7 @@ describe('edge cases', function () {
 		});
 	});
 	it('yellowblue', function () {
-		assert.throws(function(){
-			parse('yellowblue');
-		});
+		assert.deepEqual(parse('yellowblue'), {space: undefined, values: [], alpha: 1});
 	});
 });
 
