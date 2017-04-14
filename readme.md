@@ -1,5 +1,7 @@
 # color-parse [![Build Status](https://travis-ci.org/dfcreative/color-parse.svg?branch=master)](https://travis-ci.org/dfcreative/color-parse) [![Code Climate](https://codeclimate.com/github/dfcreative/color-parse/badges/gpa.svg)](https://codeclimate.com/github/dfcreative/color-parse)
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/colorjs/color-parse.svg)](https://greenkeeper.io/)
+
 Fast and tiny color string parser.
 
 
