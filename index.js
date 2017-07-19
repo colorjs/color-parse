@@ -161,7 +161,7 @@ function parse (cstr) {
 	}
 
 	//array
-	else if (Array.isArray(cstr) || ArrayBuffer.isView(cstr)) {
+	else if (Array.isArray(cstr) || ArrayBuffer.isView && ArrayBuffer.isView(cstr)) {
 		parts = [cstr[0], cstr[1], cstr[2]];
 		space = 'rgb'
 		alpha = cstr.length === 4 ? cstr[3] : 1;

@@ -7,7 +7,7 @@
     "index.js"
   ],
   "scripts": {
-    "test": "mocha"
+    "test": "node test"
   },
   "repository": {
     "type": "git",
@@ -30,6 +30,6 @@
     "is-plain-obj": "^1.1.0"
   },
   "devDependencies": {
-    "mocha": "^3.0.2"
+    "tape": "^4.7.0"
   }
 }
