@@ -1,4 +1,4 @@
-# color-parse [![Build Status](https://travis-ci.org/dfcreative/color-parse.svg?branch=master)](https://travis-ci.org/dfcreative/color-parse) [![Code Climate](https://codeclimate.com/github/dfcreative/color-parse/badges/gpa.svg)](https://codeclimate.com/github/dfcreative/color-parse)
+# color-parse [![Build Status](https://travis-ci.org/colorjs/color-parse.svg?branch=master)](https://travis-ci.org/colorjs/color-parse)
 
 Fast and tiny color string parser.
 
@@ -12,6 +12,7 @@ parse('hsla(12, 10%, 50%, .3)'); //{ space: 'hsl', values: [12, 10, 50], alpha: 
 
 ## Parsed strings
 
+* [x] `red`, see [color-name](https://github.com/colorjs/color-name)
 * [x] `rgb(10, 20, 30)`, `rgba(10, 20, 30, .3)`
 * [x] `hsl()`, `hsla()` inc. [named hues](http://dev.w3.org/csswg/css-color/#simple-hues)
 * [x] `hwb()`
@@ -38,7 +39,7 @@ parse('hsla(12, 10%, 50%, .3)'); //{ space: 'hsl', values: [12, 10, 50], alpha: 
 
 ## Not parsed strings
 
-* [x] `yellowblue` returns null
+* [x] `'yellowblue'` returns `null`
 
 ## Related
 
