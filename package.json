@@ -27,6 +27,7 @@
   "homepage": "https://github.com/dfcreative/color-parse",
   "dependencies": {
     "color-name": "^1.0.0",
+    "defined": "^1.0.0",
     "is-plain-obj": "^1.1.0"
   },
   "devDependencies": {

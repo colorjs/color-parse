@@ -4,13 +4,11 @@
 
 'use strict'
 
+var names = require('color-name')
+var isObject = require('is-plain-obj')
+var defined = require('defined')
 
-module.exports = parse;
-
-
-var names = require('color-name');
-var isObject = require('is-plain-obj');
-
+module.exports = parse
 
 /**
  * Base hues
@@ -24,8 +22,7 @@ var baseHues = {
 	green: 180,
 	blue: 240,
 	purple: 300
-};
-
+}
 
 /**
  * Parse color from the string passed
@@ -33,28 +30,28 @@ var baseHues = {
  * @return {Object} A space indicator `space`, an array `values` and `alpha`
  */
 function parse (cstr) {
-	var m, parts = [], alpha = 1, space;
+	var m, parts = [], alpha = 1, space
 
 	if (typeof cstr === 'string') {
 		//keyword
 		if (names[cstr]) {
-			parts = names[cstr].slice();
+			parts = names[cstr].slice()
 			space = 'rgb'
 		}
 
 		//reserved words
 		else if (cstr === 'transparent') {
-			alpha = 0;
+			alpha = 0
 			space = 'rgb'
 			parts = [0,0,0]
 		}
 
 		//hex
 		else if (/^#[A-Fa-f0-9]+$/.test(cstr)) {
-			var base = cstr.slice(1);
-			var size = base.length;
-			var isShort = size <= 4;
-			alpha = 1;
+			var base = cstr.slice(1)
+			var size = base.length
+			var isShort = size <= 4
+			alpha = 1
 
 			if (isShort) {
 				parts = [
@@ -77,99 +74,101 @@ function parse (cstr) {
 				}
 			}
 
-			if (!parts[0]) parts[0] = 0;
-			if (!parts[1]) parts[1] = 0;
-			if (!parts[2]) parts[2] = 0;
+			if (!parts[0]) parts[0] = 0
+			if (!parts[1]) parts[1] = 0
+			if (!parts[2]) parts[2] = 0
 
 			space = 'rgb'
 		}
 
 		//color space
 		else if (m = /^((?:rgb|hs[lvb]|hwb|cmyk?|xy[zy]|gray|lab|lchu?v?|[ly]uv|lms)a?)\s*\(([^\)]*)\)/.exec(cstr)) {
-			var name = m[1];
-			var base = name.replace(/a$/, '');
-			space = base;
-			var size = base === 'cmyk' ? 4 : base === 'gray' ? 1 : 3;
+			var name = m[1]
+			var base = name.replace(/a$/, '')
+			space = base
+			var size = base === 'cmyk' ? 4 : base === 'gray' ? 1 : 3
 			parts = m[2].trim()
 				.split(/\s*,\s*/)
 				.map(function (x, i) {
 					//<percentage>
 					if (/%$/.test(x)) {
 						//alpha
-						if (i === size)	return parseFloat(x) / 100;
+						if (i === size)	return parseFloat(x) / 100
 						//rgb
-						if (base === 'rgb') return parseFloat(x) * 255 / 100;
-						return parseFloat(x);
+						if (base === 'rgb') return parseFloat(x) * 255 / 100
+						return parseFloat(x)
 					}
 					//hue
 					else if (base[i] === 'h') {
 						//<deg>
 						if (/deg$/.test(x)) {
-							return parseFloat(x);
+							return parseFloat(x)
 						}
 						//<base-hue>
 						else if (baseHues[x] !== undefined) {
-							return baseHues[x];
+							return baseHues[x]
 						}
 					}
-					return parseFloat(x);
-				});
+					return parseFloat(x)
+				})
 
-			if (name === base) parts.push(1);
-			alpha = parts[size] === undefined ? 1 : parts[size];
-			parts = parts.slice(0, size);
+			if (name === base) parts.push(1)
+			alpha = parts[size] === undefined ? 1 : parts[size]
+			parts = parts.slice(0, size)
 		}
 
 		//named channels case
 		else if (cstr.length > 10 && /[0-9](?:\s|\/)/.test(cstr)) {
 			parts = cstr.match(/([0-9]+)/g).map(function (value) {
-				return parseFloat(value);
-			});
+				return parseFloat(value)
+			})
 
-			space = cstr.match(/([a-z])/ig).join('').toLowerCase();
+			space = cstr.match(/([a-z])/ig).join('').toLowerCase()
 		}
 	}
 
 	//numeric case
 	else if (typeof cstr === 'number') {
 		space = 'rgb'
-		parts = [cstr >>> 16, (cstr & 0x00ff00) >>> 8, cstr & 0x0000ff];
+		parts = [cstr >>> 16, (cstr & 0x00ff00) >>> 8, cstr & 0x0000ff]
 	}
 
 	//object case - detects css cases of rgb and hsl
 	else if (isObject(cstr)) {
-		if (cstr.r != null) {
-			parts = [cstr.r, cstr.g, cstr.b];
+		var r = defined(cstr.r, cstr.red, cstr.R, null)
+
+		if (r !== null) {
 			space = 'rgb'
+			parts = [
+				r,
+				defined(cstr.g, cstr.green, cstr.G),
+				defined(cstr.b, cstr.blue, cstr.B)
+			]
 		}
-		else if (cstr.red != null) {
-			parts = [cstr.red, cstr.green, cstr.blue];
-			space = 'rgb'
-		}
-		else if (cstr.h != null) {
-			parts = [cstr.h, cstr.s, cstr.l];
-			space = 'hsl';
-		}
-		else if (cstr.hue != null) {
-			parts = [cstr.hue, cstr.saturation, cstr.lightness];
-			space = 'hsl';
+		else {
+			space = 'hsl'
+			parts = [
+				defined(cstr.h, cstr.hue, cstr.H),
+				defined(cstr.s, cstr.saturation, cstr.S),
+				defined(cstr.l, cstr.lightness, cstr.L, cstr.b, cstr.brightness)
+			]
 		}
 
-		if (cstr.a != null) alpha = cstr.a;
-		else if (cstr.alpha != null) alpha = cstr.alpha;
-		else if (cstr.opacity != null) alpha = cstr.opacity / 100;
+		alpha = defined(cstr.a, cstr.alpha, cstr.opacity, 1)
+
+		if (cstr.opacity != null) alpha /= 100
 	}
 
 	//array
 	else if (Array.isArray(cstr) || global.ArrayBuffer && ArrayBuffer.isView && ArrayBuffer.isView(cstr)) {
-		parts = [cstr[0], cstr[1], cstr[2]];
+		parts = [cstr[0], cstr[1], cstr[2]]
 		space = 'rgb'
-		alpha = cstr.length === 4 ? cstr[3] : 1;
+		alpha = cstr.length === 4 ? cstr[3] : 1
 	}
 
 	return {
 		space: space,
 		values: parts,
 		alpha: alpha
-	};
+	}
 }
