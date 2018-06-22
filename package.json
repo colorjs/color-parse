@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/dfcreative/color-parse"
+    "url": "https://github.com/colorjs/color-parse"
   },
   "keywords": [
     "color",
@@ -22,9 +22,9 @@
   "author": "Deema Ywanov <df.creative@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/dfcreative/color-parse/issues"
+    "url": "https://github.com/colorjs/color-parse/issues"
   },
-  "homepage": "https://github.com/dfcreative/color-parse",
+  "homepage": "https://github.com/colorjs/color-parse",
   "dependencies": {
     "color-name": "^1.0.0",
     "defined": "^1.0.0",

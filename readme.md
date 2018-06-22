@@ -6,13 +6,15 @@ Fast and tiny color string parser.
 `$ npm install color-parse`
 
 ```js
-var parse = require('color-parse');
-parse('hsla(12, 10%, 50%, .3)'); //{ space: 'hsl', values: [12, 10, 50], alpha: 0.3 }
+var parse = require('color-parse')
+
+parse('hsla(12, 10%, 50%, .3)')
+// { space: 'hsl', values: [12, 10, 50], alpha: 0.3 }
 ```
 
 ## Parsed strings
 
-* [x] `red`, see [color-name](https://github.com/colorjs/color-name)
+* [x] `red`, `green` etc., see [color-name](https://ghub.io/color-name)
 * [x] `rgb(10, 20, 30)`, `rgba(10, 20, 30, .3)`
 * [x] `hsl()`, `hsla()` inc. [named hues](http://dev.w3.org/csswg/css-color/#simple-hues)
 * [x] `hwb()`
@@ -31,11 +33,11 @@ parse('hsla(12, 10%, 50%, .3)'); //{ space: 'hsl', values: [12, 10, 50], alpha: 
 
 ## Parsed not strings
 
-* [x] `[10, 20, 20]` as red, green and blue channels
+* [x] `[10, 20, 20]` as RGB color space
 * [x] `{r: 10, g: 20, b: 30}`
 * [x] `{red: 10, green: 20, blue: 30}`
 * [x] `{h: 10, s: 20, l: 30}`
-* [x] `0xrrggbb` numbers
+* [x] `0x00ff00`, `0x0000ff` numbers
 
 ## Not parsed strings
 
