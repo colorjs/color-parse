@@ -397,5 +397,10 @@ t('Number', function (t) {
 		values: [0x00,0x00,0xff],
 		alpha: 1
 	});
+	t.deepEqual(parse(new Number(0x0000ff)), {
+		space: 'rgb',
+		values: [0x00,0x00,0xff],
+		alpha: 1
+	});
 	t.end()
 });

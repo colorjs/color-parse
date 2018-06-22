@@ -128,7 +128,7 @@ function parse (cstr) {
 	}
 
 	//numeric case
-	else if (typeof cstr === 'number') {
+	else if (!isNaN(cstr)) {
 		space = 'rgb'
 		parts = [cstr >>> 16, (cstr & 0x00ff00) >>> 8, cstr & 0x0000ff]
 	}
