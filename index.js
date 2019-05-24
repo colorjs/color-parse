@@ -84,6 +84,7 @@ function parse (cstr) {
 		//color space
 		else if (m = /^((?:rgb|hs[lvb]|hwb|cmyk?|xy[zy]|gray|lab|lchu?v?|[ly]uv|lms)a?)\s*\(([^\)]*)\)/.exec(cstr)) {
 			var name = m[1]
+			var isRGB = name === 'rgb'
 			var base = name.replace(/a$/, '')
 			space = base
 			var size = base === 'cmyk' ? 4 : base === 'gray' ? 1 : 3
@@ -113,7 +114,7 @@ function parse (cstr) {
 				})
 
 			if (name === base) parts.push(1)
-			alpha = parts[size] === undefined ? 1 : parts[size]
+			alpha = (isRGB) ? 1 : (parts[size] === undefined) ? 1 : parts[size]
 			parts = parts.slice(0, size)
 		}
 
