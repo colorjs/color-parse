@@ -1,7 +1,5 @@
-'use strict'
-
-var parse = require('./');
-var t = require('tape')
+import parse from './index.mjs'
+import t from 'tape'
 
 /** parse-color tests */
 
