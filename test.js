@@ -201,6 +201,22 @@ t('rgba(100%, 30%, 90%, 0.2)', function (t) {
 	});
 	t.end()
 });
+t('rgba(200 20 233 / 0.2)', function (t) {
+	t.deepEqual(parse('rgba(200, 20, 233, 0.2)'), {
+		space: 'rgb',
+		values: [200, 20, 233],
+		alpha: 0.2
+	});
+	t.end()
+});
+t('rgba(200 20 233 / 20%)', function (t) {
+	t.deepEqual(parse('rgba(200, 20, 233, 0.2)'), {
+		space: 'rgb',
+		values: [200, 20, 233],
+		alpha: 0.2
+	});
+	t.end()
+});
 t('hsla(200, 20%, 33%, 0.2)', function (t) {
 	t.deepEqual(parse('hsla(200, 20%, 33%, 0.2)'), {
 		space: 'hsl',
@@ -278,6 +294,14 @@ t('hsla(101.12, 45.2%, 21.0%, 1.0)', function (t) {
 	});
 	t.end()
 });
+t('hsla(101.12 45.2% 21.0% / 50%)', function (t) {
+	t.deepEqual(parse('hsla(101.12 45.2% 21.0% / 50%)'), {
+		space: 'hsl',
+		values: [101.12,45.2,21.0],
+		alpha: .5
+	});
+	t.end()
+});
 t('hsl(red, 10%, 10%)', function (t) {
 	t.deepEqual(parse('hsl(red, 10%, 10%)'), {
 		space: 'hsl',
@@ -318,8 +342,24 @@ t('#afd6', function (t) {
 	});
 	t.end()
 });
+t('#AFD6', function (t) {
+	t.deepEqual(parse('#afd6'), {
+		space: 'rgb',
+		values: [170,255,221],
+		alpha: 0.4
+	});
+	t.end()
+});
 t('#aaffdd66', function (t) {
 	t.deepEqual(parse('#aaffdd66'), {
+		space: 'rgb',
+		values: [170,255,221],
+		alpha: 0.4
+	});
+	t.end()
+});
+t('#AAFFDD66', function (t) {
+	t.deepEqual(parse('#AAFFDD66'), {
 		space: 'rgb',
 		values: [170,255,221],
 		alpha: 0.4
