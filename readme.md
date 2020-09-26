@@ -8,7 +8,7 @@ Fast and tiny color string parser.
 ```js
 var parse = require('color-parse')
 
-parse('hsla(12, 10%, 50%, .3)')
+parse('hsla(12 10% 50% / .3)')
 // { space: 'hsl', values: [12, 10, 50], alpha: 0.3 }
 ```
 
@@ -51,9 +51,9 @@ parse('hsla(12, 10%, 50%, .3)')
 
 ## Analogs
 
-* [parse-color](http://npmjs.org/package/parse-color) — parser by James Halliday. Initially inspired by that awesome parser. It performs calculations to every possible space which results in bloated size of lib.
-* [color-parser](http://npmjs.org/package/color-parser) — parser by TJ. Supports limited set of spaces.
-* [color-string](http://npmjs.org/package/color-string) — color parsing/serializing module by Heather Arthur. Has extensive API for parsing and serializing from any to any space.
+* [parse-color](http://npmjs.org/package/parse-color) — parser by @substack. Performs calculations to every possible space, which bloats size.
+* [color-parser](http://npmjs.org/package/color-parser) — parser by @tjholowaychuk. Supports limited set of spaces.
+* [color-string](http://npmjs.org/package/color-string) — parsing/serializing module by Heather Arthur. Has extensive API for parsing and serializing from any to any space.
 
 
 [![NPM](https://nodei.co/npm/color-parse.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/color-parse/)
