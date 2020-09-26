@@ -1,12 +1,9 @@
 /**
  * @module color-parse
  */
+import names from 'color-name'
 
-'use strict'
-
-var names = require('color-name')
-
-module.exports = parse
+export default parse
 
 /**
  * Base hues

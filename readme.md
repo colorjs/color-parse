@@ -1,32 +1,31 @@
-# color-parse [![Build Status](https://travis-ci.org/colorjs/color-parse.svg?branch=master)](https://travis-ci.org/colorjs/color-parse)
+# color-parse [![build](https://travis-ci.org/colorjs/color-parse.svg?branch=master)](https://travis-ci.org/colorjs/color-parse) [![size](https://img.shields.io/bundlephobia/minzip/spect?label=size)](https://bundlephobia.com/result?p=spect) ![stable](https://img.shields.io/badge/stability-unstable-yellow)
 
-Fast and tiny color string parser.
-
+Fast and compact color string parser.
 
 `$ npm install color-parse`
 
 ```js
 var parse = require('color-parse')
 
-parse('hsla(12, 10%, 50%, .3)')
+parse('hsla(12 10% 50% / .3)')
 // { space: 'hsl', values: [12, 10, 50], alpha: 0.3 }
 ```
 
 ## Parsed strings
 
-* [x] `red`, `green` etc., see [color-name](https://ghub.io/color-name)
-* [x] `rgb(10, 20, 30)`, `rgba(10, 20, 30, .3)`
-* [x] `hsl()`, `hsla()` inc. [named hues](http://dev.w3.org/csswg/css-color/#simple-hues)
-* [x] `hwb()`
-* [x] `cmyk()`
-* [x] `xyz()`
-* [x] `lab()`
-* [x] `lch()`
-* [x] `luv()`
-* [x] `#RGB`
-* [x] `#RGBA`
-* [x] `#RRGGBB`
-* [x] `#RRGGBBAA`
+* [x] Color keywords: `red`, `green` etc., see [color-name](https://ghub.io/color-name)
+* [x] `#RGB[A]`
+* [x] `#RRGGBB[AA]`
+* [x] `rgb[a](R, G, B[, A])`
+* [x] `rgb[a](R G B[ / A])`
+* [x] `hsl[a](H, S, L[, A])`, inc. [named hues](http://dev.w3.org/csswg/css-color/#simple-hues)
+* [x] `hsl[a](H S L [ / A])`
+* [x] `hwb(H, W, B)`
+* [x] `cmyk(C, M, Y, K)`
+* [x] `xyz(X, Y, Z)`
+* [x] `lab(L, A, B)`
+* [x] `lch(L, C, H)`
+* [x] `luv(L, U, V)`
 * [x] `R:10 G:20 B:30`
 * [x] `(R10 / G20 / B30)`
 * [x] `C100/M80/Y0/K35`
@@ -51,9 +50,9 @@ parse('hsla(12, 10%, 50%, .3)')
 
 ## Analogs
 
-* [parse-color](http://npmjs.org/package/parse-color) — parser by James Halliday. Initially inspired by that awesome parser. It performs calculations to every possible space which results in bloated size of lib.
-* [color-parser](http://npmjs.org/package/color-parser) — parser by TJ. Supports limited set of spaces.
-* [color-string](http://npmjs.org/package/color-string) — color parsing/serializing module by Heather Arthur. Has extensive API for parsing and serializing from any to any space.
+* [parse-color](http://npmjs.org/package/parse-color) — parser by @substack. Performs calculations to every possible space, which bloats size.
+* [color-parser](http://npmjs.org/package/color-parser) — parser by @tjholowaychuk. Supports limited set of spaces.
+* [color-string](http://npmjs.org/package/color-string) — parsing/serializing module by Heather Arthur. Has extensive API for parsing and serializing from any to any space.
 
 
 [![NPM](https://nodei.co/npm/color-parse.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/color-parse/)
