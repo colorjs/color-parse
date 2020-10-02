@@ -3,6 +3,7 @@
   "version": "1.4.1",
   "description": "Color string parser",
   "main": "index.js",
+  "browser": "index.js",
   "module": "./index.mjs",
   "exports": {
     "require": "./index.js",
