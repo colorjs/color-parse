@@ -6,7 +6,7 @@ import t from 'tape'
 t('#ffa500', function (t) {
 	t.deepEqual(parse('#ffa500'), {
 		space: 'rgb',
-		values: [ 255, 165, 0 ],
+		values: [255, 165, 0],
 		alpha: 1
 	});
 	t.end()
@@ -14,7 +14,7 @@ t('#ffa500', function (t) {
 t('#333', function (t) {
 	t.deepEqual(parse('#333'), {
 		space: 'rgb',
-		values: [ 51, 51, 51 ],
+		values: [51, 51, 51],
 		alpha: 1
 	});
 	t.end()
@@ -22,7 +22,7 @@ t('#333', function (t) {
 t('#f98', function (t) {
 	t.deepEqual(parse('#f98'), {
 		space: 'rgb',
-		values: [ 255, 153, 136 ],
+		values: [255, 153, 136],
 		alpha: 1
 	});
 	t.end()
@@ -30,7 +30,12 @@ t('#f98', function (t) {
 t('lime', function (t) {
 	t.deepEqual(parse('lime'), {
 		space: 'rgb',
-		values: [ 0, 255, 0 ],
+		values: [0, 255, 0],
+		alpha: 1
+	});
+	t.deepEqual(parse('LIME'), {
+		space: 'rgb',
+		values: [0, 255, 0],
 		alpha: 1
 	});
 	t.end()
@@ -38,7 +43,7 @@ t('lime', function (t) {
 t('hsl(210,50,50)', function (t) {
 	t.deepEqual(parse('hsl(210,50,50)'), {
 		space: 'hsl',
-		values: [ 210, 50, 50 ],
+		values: [210, 50, 50],
 		alpha: 1
 	});
 	t.end()
@@ -46,7 +51,7 @@ t('hsl(210,50,50)', function (t) {
 t('rgba(153,50,204,60%)', function (t) {
 	t.deepEqual(parse('rgba(153,50,204,60%)'), {
 		space: 'rgb',
-		values: [ 153, 50, 204 ],
+		values: [153, 50, 204],
 		alpha: 0.6
 	});
 	t.end()
@@ -129,6 +134,11 @@ t('hwb(240deg, 100%, 50.5%)', function (t) {
 });
 t('blue', function (t) {
 	t.deepEqual(parse('blue'), {
+		space: 'rgb',
+		values: [0, 0, 255],
+		alpha: 1
+	});
+	t.deepEqual(parse('BLUE'), {
 		space: 'rgb',
 		values: [0, 0, 255],
 		alpha: 1
@@ -276,7 +286,8 @@ t('hwb(400, 10%, 200%, 10)', function (t) {
 	t.end()
 });
 t('yellowblue', function (t) {
-	t.deepEqual(parse('yellowblue'), {space: undefined, values: [], alpha: 1});
+	t.deepEqual(parse('yellowblue'), { space: undefined, values: [], alpha: 1 });
+	t.deepEqual(parse('YELLOWBLUE'), { space: undefined, values: [], alpha: 1 });
 	t.end()
 });
 
@@ -287,7 +298,7 @@ t('yellowblue', function (t) {
 t('hsla(101.12, 45.2%, 21.0%, 1.0)', function (t) {
 	t.deepEqual(parse('hsla(101.12, 45.2%, 21.0%, 1.0)'), {
 		space: 'hsl',
-		values: [101.12,45.2,21.0],
+		values: [101.12, 45.2, 21.0],
 		alpha: 1
 	});
 	t.end()
@@ -295,7 +306,7 @@ t('hsla(101.12, 45.2%, 21.0%, 1.0)', function (t) {
 t('hsla(101.12 45.2% 21.0% / 50%)', function (t) {
 	t.deepEqual(parse('hsla(101.12 45.2% 21.0% / 50%)'), {
 		space: 'hsl',
-		values: [101.12,45.2,21.0],
+		values: [101.12, 45.2, 21.0],
 		alpha: .5
 	});
 	t.end()
@@ -303,7 +314,7 @@ t('hsla(101.12 45.2% 21.0% / 50%)', function (t) {
 t('hsl(red, 10%, 10%)', function (t) {
 	t.deepEqual(parse('hsl(red, 10%, 10%)'), {
 		space: 'hsl',
-		values: [0,10,10],
+		values: [0, 10, 10],
 		alpha: 1
 	});
 	t.end()
@@ -311,7 +322,7 @@ t('hsl(red, 10%, 10%)', function (t) {
 t('hsl(red, 10%, 10%);', function (t) {
 	t.deepEqual(parse('hsl(red, 10%, 10%);'), {
 		space: 'hsl',
-		values: [0,10,10],
+		values: [0, 10, 10],
 		alpha: 1
 	});
 	t.end()
@@ -319,7 +330,7 @@ t('hsl(red, 10%, 10%);', function (t) {
 t('hsl(10deg, 10%, 10%)', function (t) {
 	t.deepEqual(parse('hsl(10deg, 10%, 10%)'), {
 		space: 'hsl',
-		values: [10,10,10],
+		values: [10, 10, 10],
 		alpha: 1
 	});
 	t.end()
@@ -327,7 +338,7 @@ t('hsl(10deg, 10%, 10%)', function (t) {
 t('lch(5, 5, orange)', function (t) {
 	t.deepEqual(parse('lch(5, 5, orange)'), {
 		space: 'lch',
-		values: [5,5,60],
+		values: [5, 5, 60],
 		alpha: 1
 	});
 	t.end()
@@ -335,7 +346,7 @@ t('lch(5, 5, orange)', function (t) {
 t('#afd6', function (t) {
 	t.deepEqual(parse('#afd6'), {
 		space: 'rgb',
-		values: [170,255,221],
+		values: [170, 255, 221],
 		alpha: 0.4
 	});
 	t.end()
@@ -343,7 +354,7 @@ t('#afd6', function (t) {
 t('#AFD6', function (t) {
 	t.deepEqual(parse('#afd6'), {
 		space: 'rgb',
-		values: [170,255,221],
+		values: [170, 255, 221],
 		alpha: 0.4
 	});
 	t.end()
@@ -351,7 +362,7 @@ t('#AFD6', function (t) {
 t('#aaffdd66', function (t) {
 	t.deepEqual(parse('#aaffdd66'), {
 		space: 'rgb',
-		values: [170,255,221],
+		values: [170, 255, 221],
 		alpha: 0.4
 	});
 	t.end()
@@ -359,7 +370,7 @@ t('#aaffdd66', function (t) {
 t('#AAFFDD66', function (t) {
 	t.deepEqual(parse('#AAFFDD66'), {
 		space: 'rgb',
-		values: [170,255,221],
+		values: [170, 255, 221],
 		alpha: 0.4
 	});
 	t.end()
@@ -389,27 +400,27 @@ t('C100/M80/Y0/K35', function (t) {
 	t.end()
 });
 t('Array', function (t) {
-	t.deepEqual(parse([1,2,3]), {
+	t.deepEqual(parse([1, 2, 3]), {
 		space: 'rgb',
-		values: [1,2,3],
+		values: [1, 2, 3],
 		alpha: 1
 	});
 	t.end()
 });
 t('Object', function (t) {
-	t.deepEqual(parse({r:1,g:2,b:3}), {
+	t.deepEqual(parse({ r: 1, g: 2, b: 3 }), {
 		space: 'rgb',
-		values: [1,2,3],
+		values: [1, 2, 3],
 		alpha: 1
 	});
-	t.deepEqual(parse({red:1,green:2,blue:3}), {
+	t.deepEqual(parse({ red: 1, green: 2, blue: 3 }), {
 		space: 'rgb',
-		values: [1,2,3],
+		values: [1, 2, 3],
 		alpha: 1
 	});
-	t.deepEqual(parse({h:1,s:2,l:3}), {
+	t.deepEqual(parse({ h: 1, s: 2, l: 3 }), {
 		space: 'hsl',
-		values: [1,2,3],
+		values: [1, 2, 3],
 		alpha: 1
 	});
 	t.end()
@@ -417,27 +428,27 @@ t('Object', function (t) {
 t('Number', function (t) {
 	t.deepEqual(parse(0xA141E), {
 		space: 'rgb',
-		values: [10,20,30],
+		values: [10, 20, 30],
 		alpha: 1
 	});
 	t.deepEqual(parse(0xff), {
 		space: 'rgb',
-		values: [0x00,0x00,0xff],
+		values: [0x00, 0x00, 0xff],
 		alpha: 1
 	});
 	t.deepEqual(parse(0xff0000), {
 		space: 'rgb',
-		values: [0xff,0x00,0x00],
+		values: [0xff, 0x00, 0x00],
 		alpha: 1
 	});
 	t.deepEqual(parse(0x0000ff), {
 		space: 'rgb',
-		values: [0x00,0x00,0xff],
+		values: [0x00, 0x00, 0xff],
 		alpha: 1
 	});
 	t.deepEqual(parse(new Number(0x0000ff)), {
 		space: 'rgb',
-		values: [0x00,0x00,0xff],
+		values: [0x00, 0x00, 0xff],
 		alpha: 1
 	});
 	t.end()

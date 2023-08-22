@@ -24,10 +24,12 @@ var baseHues = {
  *
  * @return {Object} A space indicator `space`, an array `values` and `alpha`
  */
-function parse (cstr) {
+function parse(cstr) {
 	var m, parts = [], alpha = 1, space
 
 	if (typeof cstr === 'string') {
+		cstr = cstr.toLowerCase();
+
 		//keyword
 		if (names[cstr]) {
 			parts = names[cstr].slice()
@@ -38,7 +40,7 @@ function parse (cstr) {
 		else if (cstr === 'transparent') {
 			alpha = 0
 			space = 'rgb'
-			parts = [0,0,0]
+			parts = [0, 0, 0]
 		}
 
 		//hex
@@ -89,7 +91,7 @@ function parse (cstr) {
 					//<percentage>
 					if (/%$/.test(x)) {
 						//alpha
-						if (i === size)	return parseFloat(x) / 100
+						if (i === size) return parseFloat(x) / 100
 						//rgb
 						if (base === 'rgb') return parseFloat(x) * 255 / 100
 						return parseFloat(x)
