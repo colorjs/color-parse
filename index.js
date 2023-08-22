@@ -31,6 +31,7 @@ function parse (cstr) {
 	var m, parts = [], alpha = 1, space
 
 	if (typeof cstr === 'string') {
+		cstr = cstr.toLowerCase();
 		//keyword
 		if (names[cstr]) {
 			parts = names[cstr].slice()
