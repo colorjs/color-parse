@@ -17,30 +17,32 @@ parse('hsla(12 10% 50% / .3)')
 * [x] `#RGB[A]`
 * [x] `#RRGGBB[AA]`
 * [x] `rgb[a](R, G, B[, A])`
-* [x] `rgb[a](R G B[ / A])`
+* [x] `rgb(R G B[ / A])`
 * [x] `hsl[a](H, S, L[, A])`, inc. [named hues](http://dev.w3.org/csswg/css-color/#simple-hues)
-* [x] `hsl[a](H S L [ / A])`
+* [x] `hsl(H S L [ / A])`
 * [x] `hwb(H, W, B)`
 * [x] `cmyk(C, M, Y, K)`
 * [x] `xyz(X, Y, Z)`
 * [x] `lab(L, A, B)`
+* [ ] `lab(L a b[ / A])`
 * [x] `lch(L, C, H)`
+* [ ] `lch(L C H[ / A])`
+* [ ] `oklch(L C H[ / A])`
+* [x] `oklab(L a b[ / A])`
 * [x] `luv(L, U, V)`
+* [ ] `luv(L U V[ / A])`
+* [ ] `color(space c1 c2 c3[ / A])`
 * [x] `R:10 G:20 B:30`
 * [x] `(R10 / G20 / B30)`
 * [x] `C100/M80/Y0/K35`
+* [ ] `[10, 20, 20]` as RGB
+* [ ] `10,20,20` as RGB
+* [x] `0x00ff00`, `0x0000ff` numbers as RGB
 
-## Parsed not strings
+## Not parsed
 
-* [x] `[10, 20, 20]` as RGB color space
-* [x] `{r: 10, g: 20, b: 30}`
-* [x] `{red: 10, green: 20, blue: 30}`
-* [x] `{h: 10, s: 20, l: 30}`
-* [x] `0x00ff00`, `0x0000ff` numbers
-
-## Not parsed strings
-
-* [x] `'yellowblue'` returns `null`
+* [x] unknown strings eg. `'yellowblue'`
+* [x] not strings: object, arrays etc.
 
 ## Related
 

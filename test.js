@@ -1,4 +1,4 @@
-import parse from './index.mjs'
+import parse from './index.js'
 import t from 'tape'
 
 /** parse-color tests */
@@ -343,6 +343,53 @@ t('lch(5, 5, orange)', function (t) {
 	});
 	t.end()
 });
+t('oklab', function (t) {
+	t.deepEqual(parse('oklab(40.1% 0.1143 0.045)'), {
+		space: 'oklab',
+		values: [0.401, 0.1143, 0.045],
+		alpha: 1
+	});
+	t.deepEqual(parse('oklab(59.69% 0.1007 -0.1191 / 0.5)'), {
+		space: 'oklab',
+		values: [0.5969, 0.1007, -0.1191],
+		alpha: 0.5
+	});
+	t.deepEqual(parse('oklab(0.123 100% -100% / 2)'), {
+		space: 'oklab',
+		values: [0.123, 0.4, -0.4],
+		alpha: 2
+	});
+	t.deepEqual(parse('oklab(none none none / none)'), {
+		space: 'oklab',
+		values: [0, 0, 0],
+		alpha: 0
+	});
+	t.end()
+});
+t.only('oklch', function (t) {
+	t.deepEqual(parse('oklch(40.1% 0.1143 0.045)'), {
+		space: 'oklch',
+		values: [0.401, 0.1143, 0.045],
+		alpha: 1
+	});
+	t.deepEqual(parse('oklch(59.69% 10% 49.77 / 0.5)'), {
+		space: 'oklch',
+		values: [0.5969, 0.1007, -0.1191],
+		alpha: 0.5
+	});
+	t.deepEqual(parse('oklch(40.1% 0.156 49.77% / .5)'), {
+		space: 'oklch',
+		values: [0.123, 0.4, -0.4],
+		alpha: 2
+	});
+	t.deepEqual(parse('oklch(none none none / none)'), {
+		space: 'oklch',
+		values: [0, 0, 0],
+		alpha: 0
+	});
+	t.end()
+});
+
 t('#afd6', function (t) {
 	t.deepEqual(parse('#afd6'), {
 		space: 'rgb',
