@@ -1,6 +1,6 @@
 {
   "name": "color-parse",
-  "version": "1.4.2",
+  "version": "1.4.3",
   "description": "Color string parser",
   "main": "index.js",
   "browser": "index.js",
