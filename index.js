@@ -108,14 +108,12 @@ function parse(cstr) {
 				}
 				//hue
 				if (base[i] === 'h') {
-					//<deg>
-					if (/deg$/.test(x)) {
-						return parseFloat(x)
-					}
 					//<base-hue>
-					else if (baseHues[x] !== undefined) {
-						return baseHues[x]
-					}
+					if (baseHues[x] !== undefined) return baseHues[x]
+					//<deg>
+					if (/deg$/.test(x)) return parseFloat(x)
+					//<turn>
+					if (/turn$/.test(x)) return parseFloat(x) * 360
 				}
 				if (x === 'none') return 0
 				return parseFloat(x)

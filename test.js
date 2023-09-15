@@ -59,7 +59,6 @@ t('rgba(153,50,204,60%)', function (t) {
 
 
 
-
 t('#fef', function (t) {
 	t.deepEqual(parse('#fef'), {
 		space: 'rgb',
@@ -250,6 +249,7 @@ t('rgba(200, 20, 233, 0.2)', function (t) {
 	t.end()
 });
 
+
 t('rgba(300, 600, 100, 3)', function (t) {
 	t.deepEqual(parse('rgba(300, 600, 100, 3)'), {
 		space: 'rgb',
@@ -329,10 +329,10 @@ t('hsl(10deg, 10%, 10%)', function (t) {
 	});
 	t.end()
 });
-t('hsl(10deg, 10%, 10%)', function (t) {
-	t.deepEqual(parse('hsl(10deg, 10%, 10%)'), {
+t('hsl(1.5turn, 10%, 10%)', function (t) {
+	t.deepEqual(parse('hsl(1.5turn, 10%, 10%)'), {
 		space: 'hsl',
-		values: [10, 10, 10],
+		values: [540, 10, 10],
 		alpha: 1
 	});
 	t.end()
@@ -342,6 +342,47 @@ t('lch(5, 5, orange)', function (t) {
 		space: 'lch',
 		values: [5, 5, 60],
 		alpha: 1
+	});
+	t.end()
+});
+t('lch(5 5 orange / .5)', function (t) {
+	t.deepEqual(parse('lch(5 5 orange / .5)'), {
+		space: 'lch',
+		values: [5, 5, 60],
+		alpha: 0.5
+	});
+	t.end()
+});
+t('lab(0.25, 0.25, 0.25)', function (t) {
+	t.deepEqual(parse('lab(0.25, 0.25, 0.25)'), {
+		space: 'lab',
+		values: [0.25, 0.25, 0.25],
+		alpha: 1
+	});
+	t.end()
+});
+t('lab(0.25 0.25 0.25 / 0.5)', function (t) {
+	t.deepEqual(parse('lab(0.25 0.25 0.25 / 0.5)'), {
+		space: 'lab',
+		values: [0.25, 0.25, 0.25],
+		alpha: 0.5
+	});
+	t.end()
+});
+
+t('luv(0.25, 0.25, 0.25)', function (t) {
+	t.deepEqual(parse('luv(0.25, 0.25, 0.25)'), {
+		space: 'luv',
+		values: [0.25, 0.25, 0.25],
+		alpha: 1
+	});
+	t.end()
+});
+t('luv(0.25 0.25 0.25 / 0.5)', function (t) {
+	t.deepEqual(parse('luv(0.25 0.25 0.25 / 0.5)'), {
+		space: 'luv',
+		values: [0.25, 0.25, 0.25],
+		alpha: 0.5
 	});
 	t.end()
 });

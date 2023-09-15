@@ -24,19 +24,19 @@ parse('hsla(12 10% 50% / .3)')
 * [x] `cmyk(C, M, Y, K)`
 * [x] `xyz(X, Y, Z)`
 * [x] `lab(L, A, B)`
-* [ ] `lab(L a b[ / A])`
+* [x] `lab(L a b[ / A])`
 * [x] `lch(L, C, H)`
-* [ ] `lch(L C H[ / A])`
-* [ ] `oklch(L C H[ / A])`
-* [x] `oklab(L a b[ / A])`
+* [x] `lch(L C H[ / A])`
 * [x] `luv(L, U, V)`
-* [ ] `luv(L U V[ / A])`
+* [x] `luv(L U V[ / A])`
+* [x] `oklab(L a b[ / A])`
+* [ ] `oklch(L C H[ / A])`
 * [ ] `color(space c1 c2 c3[ / A])`
 * [x] `R:10 G:20 B:30`
 * [x] `(R10 / G20 / B30)`
 * [x] `C100/M80/Y0/K35`
-* [ ] `[10, 20, 20]` as RGB
-* [ ] `10,20,20` as RGB
+* [x] `[10, 20, 20]` as RGB
+* [x] `10,20,20` as RGB
 * [x] `0x00ff00`, `0x0000ff` numbers as RGB
 
 ## Not parsed
