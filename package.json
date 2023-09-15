@@ -4,13 +4,10 @@
   "description": "Color string parser",
   "main": "index.js",
   "browser": "index.js",
-  "module": "./index.mjs",
-  "exports": {
-    "require": "./index.js",
-    "import": "./index.mjs"
-  },
+  "module": "./index.js",
+  "type": "module",
   "scripts": {
-    "test": "node test.mjs"
+    "test": "node test.js"
   },
   "repository": {
     "type": "git",
@@ -22,7 +19,7 @@
     "color-parse",
     "color-string"
   ],
-  "author": "Deema Ywanov <df.creative@gmail.com>",
+  "author": "Dmitry Ivanov <df.creative@gmail.com>",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/colorjs/color-parse/issues"
