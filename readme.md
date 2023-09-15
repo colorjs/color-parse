@@ -23,15 +23,15 @@ parse('hsla(12 10% 50% / .3)')
 * [x] `hwb(H, W, B)`
 * [x] `cmyk(C, M, Y, K)`
 * [x] `xyz(X, Y, Z)`
-* [x] `lab(L, A, B)`
-* [x] `lab(L a b[ / A])`
-* [x] `lch(L, C, H)`
-* [x] `lch(L C H[ / A])`
 * [x] `luv(L, U, V)`
 * [x] `luv(L U V[ / A])`
-* [x] `oklab(L a b[ / A])`
-* [ ] `oklch(L C H[ / A])`
-* [ ] `color(space c1 c2 c3[ / A])`
+* [x] `lab(L, A, B)`
+* [x] `lab(L a b[ / A])` - see [limits](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value/lab)
+* [x] `lch(L, C, H)`
+* [x] `lch(L C H[ / A])` - see [limits](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value/lch)
+* [x] `oklab(L a b[ / A])` - see [limits](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value/oklab)
+* [x] `oklch(L C H[ / A])` - see [limits](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value/oklch)
+* [x] `color(space c1 c2 c3[ / A])`
 * [x] `R:10 G:20 B:30`
 * [x] `(R10 / G20 / B30)`
 * [x] `C100/M80/Y0/K35`

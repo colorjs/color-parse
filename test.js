@@ -386,6 +386,53 @@ t('luv(0.25 0.25 0.25 / 0.5)', function (t) {
 	});
 	t.end()
 });
+
+t('color(...)', function (t) {
+	// --srgb: color(srgb 1 1 1);
+	t.deepEqual(parse('color(srgb-linear 1 1 1)'), {
+		space: 'srgb-linear',
+		values: [1, 1, 1],
+		alpha: 1
+	});
+	// --srgb-linear: color(srgb-linear 100% 100% 100% / 50%);
+	t.deepEqual(parse('color(srgb-linear 100% 100% 100% / 50%)'), {
+		space: 'srgb-linear',
+		values: [1, 1, 1],
+		alpha: 0.5
+	});
+	// --display-p3: color(display-p3 1 1 1);
+	t.deepEqual(parse('color(display-p3 1 1 1)'), {
+		space: 'display-p3',
+		values: [1, 1, 1],
+		alpha: 1
+	});
+	// --rec2020: color(rec2020 0 0 0);
+	t.deepEqual(parse('color(rec2020 0 0 0)'), {
+		space: 'rec2020',
+		values: [0, 0, 0],
+		alpha: 1
+	});
+	// --a98-rgb: color(a98-rgb 1 1 1 / 25%);
+	t.deepEqual(parse('color(a98-rgb 1 1 1 / 25%)'), {
+		space: 'a98-rgb',
+		values: [1, 1, 1],
+		alpha: 0.25
+	});
+	// --prophoto: color(prophoto-rgb 0% 0% 0%);
+	t.deepEqual(parse('color(prophoto-rgb 0% 0% 0%)'), {
+		space: 'prophoto-rgb',
+		values: [0, 0, 0],
+		alpha: 1
+	});
+	// --xyz: color(xyz 1 1 1);
+	t.deepEqual(parse('color(xyz 1 1 1)'), {
+		space: 'xyz',
+		values: [1, 1, 1],
+		alpha: 1
+	});
+	t.end()
+});
+
 t('oklab', function (t) {
 	t.deepEqual(parse('oklab(40.1% 0.1143 0.045)'), {
 		space: 'oklab',
@@ -409,7 +456,7 @@ t('oklab', function (t) {
 	});
 	t.end()
 });
-t.skip('oklch', function (t) {
+t('oklch', function (t) {
 	t.deepEqual(parse('oklch(40.1% 0.1143 0.045)'), {
 		space: 'oklch',
 		values: [0.401, 0.1143, 0.045],
@@ -417,13 +464,13 @@ t.skip('oklch', function (t) {
 	});
 	t.deepEqual(parse('oklch(59.69% 10% 49.77 / 0.5)'), {
 		space: 'oklch',
-		values: [0.5969, 0.1007, -0.1191],
+		values: [0.5969, 0.04000000000000001, 49.77],
 		alpha: 0.5
 	});
-	t.deepEqual(parse('oklch(40.1% 0.156 49.77% / .5)'), {
+	t.deepEqual(parse('oklch(40.1% 0.156 49.1% / .5)'), {
 		space: 'oklch',
-		values: [0.123, 0.4, -0.4],
-		alpha: 2
+		values: [0.401, 0.156, 176.76],
+		alpha: .5
 	});
 	t.deepEqual(parse('oklch(none none none / none)'), {
 		space: 'oklch',
