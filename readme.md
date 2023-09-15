@@ -1,4 +1,4 @@
-# color-parse [![build](https://travis-ci.org/colorjs/color-parse.svg?branch=master)](https://travis-ci.org/colorjs/color-parse) [![size](https://img.shields.io/bundlephobia/minzip/color-parse?label=size)](https://bundlephobia.com/result?p=color-parse) ![stable](https://img.shields.io/badge/stability-stable-green)
+# color-parse [![test](https://github.com/colorjs/color-parse/actions/workflows/test.js.yml/badge.svg)](https://github.com/colorjs/color-parse/actions/workflows/test.js.yml) [![size](https://img.shields.io/bundlephobia/minzip/color-parse?label=size)](https://bundlephobia.com/result?p=color-parse) ![stable](https://img.shields.io/badge/stability-stable-green)
 
 Fast and compact color string parser.
 
