@@ -31,6 +31,7 @@ function parse(cstr) {
 	if (typeof cstr === 'number') {
 		return { space: 'rgb', values: [cstr >>> 16, (cstr & 0x00ff00) >>> 8, cstr & 0x0000ff], alpha: 1 }
 	}
+	if (typeof cstr === 'number') return { space: 'rgb', values: [cstr >>> 16, (cstr & 0x00ff00) >>> 8, cstr & 0x0000ff], alpha: 1 }
 
 	cstr = String(cstr).toLowerCase();
 
@@ -95,7 +96,7 @@ function parse(cstr) {
 				//<percentage>
 				if (x[x.length - 1] === '%') {
 					//alpha
-					if (i === 4) return parseFloat(x) / 100
+					if (i === 3) return parseFloat(x) / 100
 					//rgb
 					if (base === 'rgb') return parseFloat(x) * 255 / 100
 					// lch/oklch
@@ -126,17 +127,17 @@ function parse(cstr) {
 	}
 
 	//named channels case
-	else if (cstr.length > 10 && /[0-9](?:\s|\/)/.test(cstr)) {
+	else if (/[0-9](?:\s|\/|,)/.test(cstr)) {
 		parts = cstr.match(/([0-9]+)/g).map(function (value) {
 			return parseFloat(value)
 		})
 
-		space = cstr.match(/([a-z])/ig).join('').toLowerCase()
+		space = cstr.match(/([a-z])/ig)?.join('')?.toLowerCase() || 'rgb'
 	}
 
 	return {
-		space: space,
+		space,
 		values: parts,
-		alpha: alpha
+		alpha
 	}
 }
