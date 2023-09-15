@@ -17,7 +17,9 @@
     "color",
     "parse",
     "color-parse",
-    "color-string"
+    "color-string",
+    "parse-color",
+    "css color"
   ],
   "author": "Dmitry Ivanov <df.creative@gmail.com>",
   "license": "MIT",
