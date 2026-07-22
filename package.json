@@ -1,11 +1,17 @@
 {
   "name": "color-parse",
-  "version": "2.0.2",
+  "version": "2.1.0",
   "description": "Color string parser",
   "main": "index.js",
   "browser": "index.js",
   "module": "./index.js",
   "type": "module",
+  "exports": {
+    ".": "./index.js"
+  },
+  "files": [
+    "index.js"
+  ],
   "scripts": {
     "test": "node test.js"
   },
