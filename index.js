@@ -31,7 +31,6 @@ function parse(cstr) {
 	if (typeof cstr === 'number') {
 		return { space: 'rgb', values: [cstr >>> 16, (cstr & 0x00ff00) >>> 8, cstr & 0x0000ff], alpha: 1 }
 	}
-	if (typeof cstr === 'number') return { space: 'rgb', values: [cstr >>> 16, (cstr & 0x00ff00) >>> 8, cstr & 0x0000ff], alpha: 1 }
 
 	cstr = String(cstr).toLowerCase();
 
@@ -52,35 +51,35 @@ function parse(cstr) {
 	else if (cstr[0] === '#') {
 		var base = cstr.slice(1)
 		var size = base.length
-		var isShort = size <= 4
-		alpha = 1
 
-		if (isShort) {
-			parts = [
-				parseInt(base[0] + base[0], 16),
-				parseInt(base[1] + base[1], 16),
-				parseInt(base[2] + base[2], 16)
-			]
-			if (size === 4) {
-				alpha = parseInt(base[3] + base[3], 16) / 255
+		//#rgb[a] or #rrggbb[aa] only — a stray size or non-hex digit is not a color, not black
+		if (/^[0-9a-f]{3,8}$/.test(base) && size !== 5 && size !== 7) {
+			var isShort = size <= 4
+			alpha = 1
+
+			if (isShort) {
+				parts = [
+					parseInt(base[0] + base[0], 16),
+					parseInt(base[1] + base[1], 16),
+					parseInt(base[2] + base[2], 16)
+				]
+				if (size === 4) {
+					alpha = parseInt(base[3] + base[3], 16) / 255
+				}
 			}
-		}
-		else {
-			parts = [
-				parseInt(base[0] + base[1], 16),
-				parseInt(base[2] + base[3], 16),
-				parseInt(base[4] + base[5], 16)
-			]
-			if (size === 8) {
-				alpha = parseInt(base[6] + base[7], 16) / 255
+			else {
+				parts = [
+					parseInt(base[0] + base[1], 16),
+					parseInt(base[2] + base[3], 16),
+					parseInt(base[4] + base[5], 16)
+				]
+				if (size === 8) {
+					alpha = parseInt(base[6] + base[7], 16) / 255
+				}
 			}
+
+			space = 'rgb'
 		}
-
-		if (!parts[0]) parts[0] = 0
-		if (!parts[1]) parts[1] = 0
-		if (!parts[2]) parts[2] = 0
-
-		space = 'rgb'
 	}
 
 	// color space
@@ -137,13 +136,22 @@ function parse(cstr) {
 		alpha = parts.length > dims ? parts.pop() : 1
 	}
 
-	//named channels case
-	else if (/[0-9](?:\s|\/|,)/.test(cstr)) {
-		parts = cstr.match(/([0-9]+)/g).map(function (value) {
-			return parseFloat(value)
-		})
+	//named channels case: "R:10 G:20 B:30", "(R10 / G20 / B30)", "C100/M80/Y0/K35", "L 0.39 C 0.083 H 153"
+	//— an unrecognized function syntax like srgb(.5 .1 .2) is not a channel list
+	else if (!/^[a-z][a-z0-9-]*\s*\(/.test(cstr) && /[0-9](?:\s|\/|,)/.test(cstr)) {
+		parts = cstr.match(/-?[0-9]*\.?[0-9]+/g).map(Number)
 
-		space = cstr.match(/([a-z])/ig)?.join('')?.toLowerCase() || 'rgb'
+		//channel letters name the space; angle units are not channels
+		space = cstr.replace(/grad|deg|rad|turn/g, '').match(/([a-z])/ig)?.join('')?.toLowerCase() || 'rgb'
+
+		//trailing alpha: "R:0 G:0 B:0 A:0.5" or a fourth bare number
+		if (space.length > 3 && space[space.length - 1] === 'a' && space.length === parts.length) {
+			space = space.slice(0, -1)
+			alpha = parts.pop()
+		}
+		else if (space === 'rgb' && parts.length === 4) {
+			alpha = parts.pop()
+		}
 	}
 
 	return {

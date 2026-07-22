@@ -590,3 +590,31 @@ t('Number', function (t) {
 	// });
 	t.end()
 });
+
+t('decimals and negatives in named channels', function (t) {
+	t.deepEqual(parse('R:10.5 G:20 B:30.25'), { space: 'rgb', values: [10.5, 20, 30.25], alpha: 1 });
+	t.deepEqual(parse('L 0.39 C 0.083 H 153'), { space: 'lch', values: [0.39, 0.083, 153], alpha: 1 });
+	t.deepEqual(parse('L:50 A:-20 B:30'), { space: 'lab', values: [50, -20, 30], alpha: 1 });
+	t.end()
+});
+t('named alpha channel', function (t) {
+	t.deepEqual(parse('R:0 G:128 B:255 A:0.5'), { space: 'rgb', values: [0, 128, 255], alpha: 0.5 });
+	t.deepEqual(parse('H:200 S:50 L:50 A:1'), { space: 'hsl', values: [200, 50, 50], alpha: 1 });
+	t.deepEqual(parse('10, 20, 30, 0.5'), { space: 'rgb', values: [10, 20, 30], alpha: 0.5 });
+	t.end()
+});
+t('angle units in named channels', function (t) {
+	t.deepEqual(parse('H 319deg S 65 L 63'), { space: 'hsl', values: [319, 65, 63], alpha: 1 });
+	t.end()
+});
+t('invalid hex', function (t) {
+	t.deepEqual(parse('#zzz'), { space: undefined, values: [], alpha: 1 });
+	t.deepEqual(parse('#12345'), { space: undefined, values: [], alpha: 1 });
+	t.deepEqual(parse('#ff88'), { space: 'rgb', values: [255, 255, 136], alpha: 136 / 255 });
+	t.end()
+});
+t('unknown function syntax is not channels', function (t) {
+	t.deepEqual(parse('srgb(0.85098 0.121569 0.160784)'), { space: undefined, values: [], alpha: 1 });
+	t.deepEqual(parse('device-cmyk(0 81 81 30)'), { space: undefined, values: [], alpha: 1 });
+	t.end()
+});
