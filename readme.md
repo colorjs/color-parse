@@ -57,6 +57,3 @@ parse('hsla(12 10% 50% / .3)')
 * [parse-color](http://npmjs.org/package/parse-color) — parser by @substack. Performs calculations to every possible space, which bloats size.
 * [color-parser](http://npmjs.org/package/color-parser) — parser by @tjholowaychuk. Supports limited set of spaces.
 * [color-string](http://npmjs.org/package/color-string) — parsing/serializing module by Heather Arthur. Has extensive API for parsing and serializing from any to any space.
-
-
-[![NPM](https://nodei.co/npm/color-parse.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/color-parse/)
