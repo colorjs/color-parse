@@ -5,7 +5,7 @@ Fast and compact color string parser.
 `$ npm install color-parse`
 
 ```js
-var parse = require('color-parse')
+import parse from 'color-parse'
 
 parse('hsla(12 10% 50% / .3)')
 // { space: 'hsl', values: [12, 10, 50], alpha: 0.3 }
@@ -32,16 +32,18 @@ parse('hsla(12 10% 50% / .3)')
 * [x] `oklab(L a b[ / A])` - see [limits](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value/oklab)
 * [x] `oklch(L C H[ / A])` - see [limits](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value/oklch)
 * [x] `color(space c1 c2 c3[ / A])`
-* [x] `R:10 G:20 B:30`
+* [x] `R:10 G:20 B:30[ A:0.5]`, decimals and negatives included
+* [x] `L 0.39 C 0.083 H 153`
 * [x] `(R10 / G20 / B30)`
 * [x] `C100/M80/Y0/K35`
 * [x] `[10, 20, 20]` as RGB
-* [x] `10,20,20` as RGB
+* [x] `10,20,20[,0.5]` as RGB[A]
 * [x] `0x00ff00`, `0x0000ff` numbers as RGB
 
 ## Not parsed
 
 * [x] unknown strings eg. `'yellowblue'`
+* [x] malformed hex eg. `#zzz`, `#12345`
 * [x] not strings: object, arrays etc.
 
 ## Related
