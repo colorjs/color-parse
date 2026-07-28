@@ -5,12 +5,17 @@
   "main": "index.js",
   "browser": "index.js",
   "module": "./index.js",
+  "types": "./index.d.ts",
   "type": "module",
   "exports": {
-    ".": "./index.js"
+    ".": {
+      "types": "./index.d.ts",
+      "default": "./index.js"
+    }
   },
   "files": [
-    "index.js"
+    "index.js",
+    "index.d.ts"
   ],
   "scripts": {
     "test": "node test.js"
