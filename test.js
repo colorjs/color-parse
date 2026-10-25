@@ -618,3 +618,31 @@ t('unknown function syntax is not channels', function (t) {
 	t.deepEqual(parse('device-cmyk(0 81 81 30)'), { space: undefined, values: [], alpha: 1 });
 	t.end()
 });
+t('a name only from the table: prototype keys are no color', function (t) {
+	t.deepEqual(parse('constructor'), { space: undefined, values: [], alpha: 1 });
+	t.deepEqual(parse('__proto__'), { space: undefined, values: [], alpha: 1 });
+	t.deepEqual(parse('hasOwnProperty'), { space: undefined, values: [], alpha: 1 });
+	t.end()
+});
+t('spaces around the color are not the color', function (t) {
+	t.deepEqual(parse('  #FFF  '), { space: 'rgb', values: [255, 255, 255], alpha: 1 });
+	t.deepEqual(parse('\tred\n'), { space: 'rgb', values: [255, 0, 0], alpha: 1 });
+	t.end()
+});
+t('a function short of channels, over them, or holding what is no number: no color', function (t) {
+	t.deepEqual(parse('rgb(1 2)'), { space: undefined, values: [], alpha: 1 });
+	t.deepEqual(parse('rgb(1 2 3 4 5)'), { space: undefined, values: [], alpha: 1 });
+	t.deepEqual(parse('xyz(1 2)'), { space: undefined, values: [], alpha: 1 });
+	t.deepEqual(parse('rgb(calc(255/2) 0 0)'), { space: undefined, values: [], alpha: 1 });
+	t.deepEqual(parse('oklch(from red l c h)'), { space: undefined, values: [], alpha: 1 });
+	t.deepEqual(parse('rgb(0 0 0 / x)'), { space: undefined, values: [], alpha: 1 });
+	t.deepEqual(parse('gray(50)'), { space: 'gray', values: [50], alpha: 1 }, 'one channel where one is due');
+	t.deepEqual(parse('cmyk(0 0 0 0 / 0.5)'), { space: 'cmyk', values: [0, 0, 0, 0], alpha: 0.5 }, 'four where four are');
+	t.end()
+});
+t('color() names a predefined space or a profile', function (t) {
+	t.deepEqual(parse('color(foo 1 2 3)'), { space: undefined, values: [], alpha: 1 });
+	t.deepEqual(parse('color(display-p3 1 0 0)'), { space: 'display-p3', values: [1, 0, 0], alpha: 1 });
+	t.deepEqual(parse('color(--swop 0 0.5 1)'), { space: '--swop', values: [0, 0.5, 1], alpha: 1 });
+	t.end()
+});

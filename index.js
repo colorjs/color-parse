@@ -5,6 +5,9 @@ import names from 'color-name'
 
 export default parse
 
+//color()'s predefined spaces, CSS Color 4 #predefined
+var predefined = new Set(['srgb', 'srgb-linear', 'display-p3', 'a98-rgb', 'prophoto-rgb', 'rec2020', 'xyz', 'xyz-d50', 'xyz-d65'])
+
 /**
  * Base hues
  * http://dev.w3.org/csswg/css-color/#typedef-named-hue
@@ -32,10 +35,10 @@ function parse(cstr) {
 		return { space: 'rgb', values: [cstr >>> 16, (cstr & 0x00ff00) >>> 8, cstr & 0x0000ff], alpha: 1 }
 	}
 
-	cstr = String(cstr).toLowerCase();
+	cstr = String(cstr).trim().toLowerCase();
 
-	//keyword
-	if (names[cstr]) {
+	//keyword – the table's own names only: 'constructor' is none
+	if (Object.hasOwn(names, cstr)) {
 		parts = names[cstr].slice()
 		space = 'rgb'
 	}
@@ -89,8 +92,11 @@ function parse(cstr) {
 		var dims = space === 'cmyk' ? 4 : space === 'gray' ? 1 : 3
 		parts = m[2].trim().split(/\s*[,\/]\s*|\s+/)
 
-		// color(srgb-linear x x x) -> srgb-linear(x x x)
-		if (space === 'color') space = parts.shift()
+		// color(srgb-linear x x x) -> srgb-linear(x x x): a predefined space, or a profile's --name (CSS Color 5)
+		if (space === 'color') {
+			space = parts.shift()
+			if (!predefined.has(space) && !/^--[a-z0-9-]+$/.test(space)) return fail()
+		}
 
 		parts = parts.map(function (x, i) {
 			//<percentage>
@@ -134,6 +140,9 @@ function parse(cstr) {
 		});
 
 		alpha = parts.length > dims ? parts.pop() : 1
+
+		//a channel short or over, or one that is no number (calc(), relative syntax): not a color
+		if (parts.length !== dims || !parts.every(Number.isFinite) || !Number.isFinite(alpha)) return fail()
 	}
 
 	//named channels case: "R:10 G:20 B:30", "(R10 / G20 / B30)", "C100/M80/Y0/K35", "L 0.39 C 0.083 H 153"
@@ -154,9 +163,16 @@ function parse(cstr) {
 		}
 	}
 
+	if (!space) return fail()
+
 	return {
 		space,
 		values: parts,
 		alpha
 	}
+}
+
+//what any string that is no color parses to
+function fail() {
+	return { space: undefined, values: [], alpha: 1 }
 }

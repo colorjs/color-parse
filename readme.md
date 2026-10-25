@@ -31,7 +31,7 @@ parse('hsla(12 10% 50% / .3)')
 * [x] `lch(L C H[ / A])` - see [limits](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value/lch)
 * [x] `oklab(L a b[ / A])` - see [limits](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value/oklab)
 * [x] `oklch(L C H[ / A])` - see [limits](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value/oklch)
-* [x] `color(space c1 c2 c3[ / A])`
+* [x] `color(space c1 c2 c3[ / A])` – a predefined space (`srgb`, `display-p3`, `xyz-d50`…) or a profile's `--name`
 * [x] `R:10 G:20 B:30[ A:0.5]`, decimals and negatives included
 * [x] `L 0.39 C 0.083 H 153`
 * [x] `(R10 / G20 / B30)`
@@ -44,6 +44,8 @@ parse('hsla(12 10% 50% / .3)')
 
 * [x] unknown strings eg. `'yellowblue'`
 * [x] malformed hex eg. `#zzz`, `#12345`
+* [x] a function with too few or too many channels, or one that is no number, eg. `rgb(1 2)`, `rgb(calc(255/2) 0 0)`, `oklch(from red l c h)`
+* [x] `color()` of an unknown space, eg. `color(foo 1 2 3)`
 * [x] not strings: object, arrays etc.
 
 ## Related
