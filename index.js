@@ -136,7 +136,8 @@ function parse(cstr) {
 				if (x.endsWith('rad')) return parseFloat(x) * 180 / Math.PI
 			}
 			if (x === 'none') return 0
-			return parseFloat(x)
+			// a plain <number>; anything else (e.g. an unsupported unit like 10px) is not a color
+			return /^[-+]?(?:\d+\.?\d*|\.\d+)(?:e[-+]?\d+)?$/i.test(x) ? parseFloat(x) : NaN
 		});
 
 		alpha = parts.length > dims ? parts.pop() : 1

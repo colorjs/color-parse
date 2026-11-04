@@ -646,3 +646,11 @@ t('color() names a predefined space or a profile', function (t) {
 	t.deepEqual(parse('color(--swop 0 0.5 1)'), { space: '--swop', values: [0, 0.5, 1], alpha: 1 });
 	t.end()
 });
+t('unsupported units are not a color', function (t) {
+	t.deepEqual(parse('rgb(10px, 0, 0)'), { space: undefined, values: [], alpha: 1 });
+	t.deepEqual(parse('rgb(10 0 0 / 5px)'), { space: undefined, values: [], alpha: 1 });
+	t.deepEqual(parse('hsl(120foo 100% 50%)'), { space: undefined, values: [], alpha: 1 });
+	t.deepEqual(parse('lab(50 1em 0)'), { space: undefined, values: [], alpha: 1 });
+	t.deepEqual(parse('rgb(1e2 .5 +3)'), { space: 'rgb', values: [100, 0.5, 3], alpha: 1 }, 'plain numbers still parse');
+	t.end()
+});
